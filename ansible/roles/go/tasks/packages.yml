@@ -1,0 +1,8 @@
+---
+- name:                 Install go packages
+  command:              'go get {{ item }}'
+  with_items:
+    -  github.com/github/hub
+    -  github.com/peco/peco/cmd/peco
+    -  github.com/motemen/ghq
+  

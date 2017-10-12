@@ -1,0 +1,14 @@
+---
+- name:                 Install packages
+  apt:                  pkg={{ item }} state=present 
+  with_items:           
+    - ansible
+    - exuberant-ctags
+    - screen
+    - bash-completion
+    - curl
+    - vim
+    - golang-go
+    - language-pack-ja
+    - silversearcher-ag
+  become:                yes

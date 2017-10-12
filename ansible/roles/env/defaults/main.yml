@@ -1,0 +1,4 @@
+---
+ghq_root: "{{ ansible_user_dir }}/.ghq/github.com"
+
+

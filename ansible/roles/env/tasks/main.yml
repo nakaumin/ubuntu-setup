@@ -1,0 +1,37 @@
+---
+- name: Clone dotfiles
+  git:
+    repo: "https://github.com/nakaumin/dotfiles"
+    dest: "{{ ghq_root }}/nakaumin/dotfiles"
+    accept_hostkey: yes
+
+- name: Clone bin
+  git:
+    repo: "https://github.com/nakaumin/bin"
+    dest: "{{ ghq_root }}/nakaumin/bin"
+    accept_hostkey: yes
+
+- name: Create symlinks for bin
+  file:
+    src: "{{ ghq_root }}/nakaumin/bin"
+    dest: "~/bin"
+    force: yes
+    state: link
+
+- name: Create symlinks for dotfiles
+  shell: |
+    bin/mksymlink "{{ ghq_root }}/nakaumin/dotfiles"
+  args:
+    chdir: "~"
+    
+- name: Execute .bashrc
+  shell: |
+    bash ~/.bash_profile
+  args:
+    chdir: "~"
+    
+#- name: Clone credentials
+#  git:
+#    repo: "https://github.com/nakaumin/credentials"
+#    dest: "{{ ghq_root }}/nakaumin/credentials"
+#    accept_hostkey: yes

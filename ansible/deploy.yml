@@ -1,0 +1,12 @@
+---
+# Checkout
+
+- name:                    Setup for ubuntu 16.04
+  hosts:                   all
+
+  ### roles ###
+  roles:
+    - apt
+    - go
+    - env
+

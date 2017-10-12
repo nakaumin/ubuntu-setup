@@ -1,0 +1,28 @@
+---
+- name:                 'Download go 1.8.3'
+  get_url:
+    url:                https://storage.googleapis.com/golang/go1.8.3.linux-amd64.tar.gz
+#    checksum:           f81c8911dc76cd2b4ddd3d7ea845fe7ed83abd493b382fff216e1a8f637b5e7f
+    dest:               ~/go.tar.gz
+      
+- name:                 Unarchive tarball
+  unarchive:
+    src:                ~/go.tar.gz
+    dest:               /usr/local/
+  become:               yes
+
+
+- name:                 Backup old go
+  command:              'mv /usr/bin/go /usr/bin/go.bak'
+  args:
+    creates:            /usr/bin/go /usr/bin/go.bak
+  become:               yes
+  failed_when:          false
+  
+- name:                 Create symlink for latest go
+  file:
+    state:              link
+    src:                /usr/local/go/bin/go 
+    dest:               /usr/bin/go
+  become:               yes
+  
